@@ -2,6 +2,8 @@ package com.elberjsn.gerenciador.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +24,7 @@ public class Categoria implements Serializable{
     @NotNull(message = "A Categoria do produto não pode ser vazia")
     private String nome;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "produtos")
     private Produto produtos;

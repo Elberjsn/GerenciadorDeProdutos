@@ -2,6 +2,8 @@ package com.elberjsn.gerenciador.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class Fornecedor {
     @JoinTable(name = "contatos_forn",joinColumns =@JoinColumn(name="contato_id"),inverseJoinColumns = @JoinColumn(name="fornecedor_id"))
     Set<Contato> contatos;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "produtos_forn",joinColumns =@JoinColumn(name="produto_id"),inverseJoinColumns = @JoinColumn(name="fornecedor_id"))
     Set<Produto> produtos;
