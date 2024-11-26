@@ -8,4 +8,5 @@ import com.elberjsn.gerenciador.model.Produto;
 
 public interface ProdutoRepository  extends JpaRepository<Produto,Long> {
     List<Produto> findByNomeContainingIgnoreCase(String nome);
+    List<Produto> findByCategoriaNomeContainingIgnoreCase(String nome);
 }

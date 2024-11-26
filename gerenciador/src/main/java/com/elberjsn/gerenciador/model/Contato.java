@@ -21,6 +21,10 @@ public class Contato {
     @NotNull(message = "O Contato do Fornecedor não pode ser vazio")
     private String telefone;
 
+    private String email;
+
+    private String endereco;
+
     @ManyToMany(mappedBy = "contatos")
     Set<Fornecedor> fornecedor;
 }

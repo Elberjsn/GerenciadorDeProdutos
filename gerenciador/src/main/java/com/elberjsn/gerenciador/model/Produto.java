@@ -34,6 +34,7 @@ public class Produto implements Serializable{
     private Integer quantidadeEstoque;
     private String urlImagem;
     private LocalDate validade;
+    private LocalDate ultimaAtualizacao;
 
 
     @ManyToMany(mappedBy = "produtos")
