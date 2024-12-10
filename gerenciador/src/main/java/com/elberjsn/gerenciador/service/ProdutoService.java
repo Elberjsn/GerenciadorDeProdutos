@@ -1,5 +1,6 @@
 package com.elberjsn.gerenciador.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class ProdutoService {
     ProdutoRepository produtoRepository;
 
     public Produto salvarProduto(Produto prd){
+        prd.setUltimaAtualizacao(LocalDate.now());
         return produtoRepository.save(prd);
     }
     public List<Produto> buscarProdutos(){

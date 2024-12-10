@@ -3,15 +3,16 @@ package com.elberjsn.gerenciador.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -37,12 +38,13 @@ public class Produto implements Serializable{
     private LocalDate ultimaAtualizacao;
 
 
-    @ManyToMany(mappedBy = "produtos")
-    @NotNull(message = "O Fornecedor do produto não pode ser vazio!")
-    private Set<Fornecedor> fornecedor;
+    @ManyToMany
+    @JoinTable(name = "forn_dos_prd",joinColumns={@JoinColumn(name = "produto_id")},inverseJoinColumns={@JoinColumn(name = "fornecedor_id")})
+    private List<Fornecedor> fornecedoresPrd;
 
-    @OneToMany
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "produtos")
-    @NotNull(message = "A Categoria do produto não pode ser vazio!")
-    private List<Categoria> categoria;
+    private Categoria categoria;
+    
 }

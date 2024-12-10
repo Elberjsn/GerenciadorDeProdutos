@@ -3,6 +3,7 @@ package com.elberjsn.gerenciador.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,11 @@ public class CategoriaService {
     CategoriaRepository categoriaRepository;
 
     public Categoria savarCategoria(Categoria cat){
-        return categoriaRepository.save(cat);
+        try {
+            return categoriaRepository.save(cat);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Erro ao salvar: "+ cat.getNome()+" Nome ja cadastrado");
+        }
     }
     public Categoria buscarCategoriaPorId(Long id){
         var cat = categoriaRepository.findById(id);
@@ -39,7 +44,7 @@ public class CategoriaService {
     public Categoria atualizarCategoria(Categoria cat){
         var buscaCat = buscarCategoriaPorId(cat.getId());
         buscaCat.setNome(cat.getNome());
-        return categoriaRepository.save(buscaCat);
+        return savarCategoria(cat);
     }
     public void deletarCategoria(Categoria cat){
         categoriaRepository.delete(cat);

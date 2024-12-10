@@ -8,7 +8,7 @@ import com.elberjsn.gerenciador.model.Contato;
 
 
 public interface ContatoRepository  extends JpaRepository<Contato,Long> {
-    List<Contato> findByFornecedorId(Long idForn);
-    List<Contato> findByFornecedorNomeContainingIgnoringCase(String nome);
+    List<Contato> findByFornecedorContatosId(Long idForn);
+    List<Contato> findByFornecedorContatosNomeContainingIgnoringCase(String nome);
 
 }
